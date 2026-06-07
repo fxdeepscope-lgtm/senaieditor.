@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CreatorHub AI - Your All-in-One Content Creation Studio</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="logo">
+            <i class="fas fa-robot"></i>
+            <span>CreatorHub AI</span>
+        </div>
+        <ul class="nav-links">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#ai-tools">AI Tools</a></li>
+            <li><a href="#portfolio">Portfolio</a></li>
+            <li><a href="#chatbot">AI Chat</a></li>
+            <li><a href="#contact" class="btn-contact">Contact Me</a></li>
+        </ul>
+        <div class="hamburger">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <span class="badge">✨ AI-Powered Content Creation</span>
+            <h1>Create Better Content <span class="highlight">Faster</span> with AI</h1>
+            <p>Get AI-generated scripts, viral hooks, eye-catching images, and expert advice - all in one place. Plus, hire me for professional video editing!</p>
+            <div class="hero-buttons">
+                <a href="#ai-tools" class="btn-primary"><i class="fas fa-magic"></i> Start Creating Free</a>
+                <a href="#portfolio" class="btn-secondary"><i class="fas fa-eye"></i> View My Work</a>
+            </div>
+            <div class="stats">
+                <div class="stat">
+                    <span class="number">500+</span>
+                    <span class="label">Scripts Generated</span>
+                </div>
+                <div class="stat">
+                    <span class="number">50+</span>
+                    <span class="label">Happy Clients</span>
+                </div>
+                <div class="stat">
+                    <span class="number">100%</span>
+                    <span class="label">Free to Use</span>
+                </div>
+            </div>
+        </div>
+        <div class="hero-visual">
+            <div class="floating-card card-1">
+                <i class="fas fa-video"></i>
+                <span>Script Writer</span>
+            </div>
+            <div class="floating-card card-2">
+                <i class="fas fa-bolt"></i>
+                <span>Hook Generator</span>
+            </div>
+            <div class="floating-card card-3">
+                <i class="fas fa-image"></i>
+                <span>Image Creator</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- AI Tools Section -->
+    <section id="ai-tools" class="ai-tools">
+        <div class="section-header">
+            <h2>🚀 Powerful AI Tools</h2>
+            <p>Everything you need to create viral content - completely free!</p>
+        </div>
+        
+        <div class="tools-grid">
+            <!-- Script Writer Tool -->
+            <div class="tool-card">
+                <div class="tool-icon">
+                    <i class="fas fa-pen-nib"></i>
+                </div>
+                <h3>AI Script Writer</h3>
+                <p>Generate professional video scripts in seconds. Just describe your topic and let AI do the magic!</p>
+                <div class="tool-input">
+                    <input type="text" id="script-topic" placeholder="Enter your video topic (e.g., 'Top 10 Travel Tips')">
+                    <textarea id="script-details" placeholder="Add any specific details you want included..."></textarea>
+                    <button class="btn-generate" onclick="generateScript()">
+                        <i class="fas fa-magic"></i> Generate Script
+                    </button>
+                </div>
+                <div class="tool-output" id="script-output">
+                    <h4>Generated Script:</h4>
+                    <div class="output-content" id="script-result">
+                        <p class="placeholder-text">Your script will appear here...</p>
+                    </div>
+                    <button class="btn-copy" onclick="copyToClipboard('script-result')">
+                        <i class="fas fa-copy"></i> Copy
+                    </button>
+                </div>
+            </div>
+
+            <!-- Hook Generator Tool -->
+            <div class="tool-card">
+                <div class="tool-icon hook-icon">
+                    <i class="fas fa-bolt"></i>
+                </div>
+                <h3>AI Hook Generator</h3>
+                <p>Create scroll-stopping hooks that make viewers watch your entire video!</p>
+                <div class="tool-input">
+                    <input type="text" id="hook-topic" placeholder="What's your video about?">
+                    <select id="hook-style">
+                        <option value="question">Question Hook</option>
+                        <option value="shocking">Shocking Statement</option>
+                        <option value="story">Story Hook</option>
+                        <option value="list">List Format</option>
+                        <option value="controversial">controversial Take</option>
+                    </select>
+                    <button class="btn-generate" onclick="generateHooks()">
+                        <i class="fas fa-magic"></i> Generate Hooks
+                    </button>
+                </div>
+                <div class="tool-output" id="hook-output">
+                    <h4>Viral Hooks:</h4>
+                    <div class="output-content" id="hook-result">
+                        <p class="placeholder-text">Your hooks will appear here...</p>
+                    </div>
+                    <button class="btn-copy" onclick="copyToClipboard('hook-result')">
+                        <i class="fas fa-copy"></i> Copy
+                    </button>
+                </div>
+            </div>
+
+            <!-- Image Generator Tool -->
+            <div class="tool-card">
+                <div class="tool-icon image-icon">
+                    <i class="fas fa-image"></i>
+                </div>
+                <h3>AI Image Generator</h3>
+                <p>Generate stunning visuals for your thumbnails and social media posts!</p>
+                <div class="tool-input">
+                    <input type="text" id="image-prompt" placeholder="Describe the image you want (e.g., 'A futuristic city at sunset with neon lights')">
+                    <select id="image-style">
+                        <option value="realistic">Realistic</option>
+                        <option value=" cartoon">Cartoon/Anime</option>
+                        <option value="abstract">Abstract</option>
+                        <option value="minimalist">Minimalist</option>
+                        <option value="cyberpunk">Cyberpunk</option>
+                    </select>
+                    <button class="btn-generate" onclick="generateImage()">
+                        <i class="fas fa-magic"></i> Generate Image
+                    </button>
+                </div>
+                <div class="tool-output" id="image-output">
+                    <h4>Generated Image:</h4>
+                    <div class="output-content" id="image-result">
+                        <div class="image-placeholder">
+                            <i class="fas fa-image"></i>
+                            <p>Your generated image will appear here</p>
+                            <small>Using DALL-E API integration</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Portfolio Section -->
+    <section id="portfolio" class="portfolio">
+        <div class="section-header">
+            <h2>🎬 My Video Editing Portfolio</h2>
+            <p>Check out my previous editing work and hire me for your next project!</p>
+        </div>
+
+        <div class="portfolio-grid">
+            <div class="portfolio-item">
+                <div class="portfolio-video">
+                    <iframe src="https://www.youtube.com/embed/YOUR_VIDEO_1" frameborder="0" allowfullscreen></iframe>
+                </div>
+                <div class="portfolio-info">
+                    <h4>Travel Vlog Editing</h4>
+                    <p>Color grading, transitions, and motion graphics</p>
+                    <div class="portfolio-tags">
+                        <span>YouTube</span>
+                        <span>Travel</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="portfolio-item">
+                <div class="portfolio-video">
+                    <iframe src="https://www.youtube.com/embed/YOUR_VIDEO_2" frameborder="0" allowfullscreen></iframe>
+                </div>
+                <div class="portfolio-info">
+                    <h4>Tech Review Editing</h4>
+                    <p>Fast-paced edits, sound design, and animations</p>
+                    <div class="portfolio-tags">
+                        <span>YouTube</span>
+                        <span>Tech</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="portfolio-item">
+                <div class="portfolio-video">
+                    <iframe src="https://www.youtube.com/embed/YOUR_VIDEO_3" frameborder="0" allowfullscreen></iframe>
+                </div>
+                <div class="portfolio-info">
+                    <h4>Lifestyle Content</h4>
+                    <p>Clean edits, aesthetic color grading</p>
+                    <div class="portfolio-tags">
+                        <span>Instagram</span>
+                        <span>Lifestyle</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="portfolio-item">
+                <div class="portfolio-video">
+                    <iframe src="https://www.youtube.com/embed/YOUR_VIDEO_4" frameborder="0" allowfullscreen></iframe>
+                </div>
+                <div class="portfolio-info">
+                    <h4>Documentary Style</h4>
+                    <p>Multi-camera editing, interviews</p>
+                    <div class="portfolio-tags">
+                        <span>Documentary</span>
+                        <span>Educational</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="portfolio-cta">
+            <h3>Like what you see?</h3>
+            <p>Let's work together on your next project!</p>
+            <a href="#contact" class="btn-primary">
+                <i class="fas fa-envelope"></i> Hire Me
+            </a>
+        </div>
+    </section>
+
+    <!-- AI Chat Section -->
+    <section id="chatbot" class="chatbot-section">
+        <div class="section-header">
+            <h2>💬 AI Content Assistant</h2>
+            <p>Need advice? Chat with our AI to get tips on scripts, hooks, thumbnails, and more!</p>
+        </div>
+
+        <div class="chatbot-container">
+            <div class="chat-header">
+                <i class="fas fa-robot"></i>
+                <span>AI Content Assistant</span>
+                <span class="status">Online</span>
+            </div>
+            <div class="chat-messages" id="chat-messages">
+                <div class="message bot-message">
+                    <div class="message-icon">
+                        <i class="fas fa-robot"></i>
+                    </div>
+                    <div class="message-content">
+                        <p>Hey there! 👋 I'm your AI content creation assistant. I can help you with:</p>
+                        <ul>
+                            <li>📝 Script ideas and outlines</li>
+                            <li>🔥 Viral hook suggestions</li>
+                            <li>🎨 Thumbnail ideas</li>
+                            <li>📱 Content strategies</li>
+                            <li>✂️ Video editing tips</li>
+                        </ul>
+                        <p>What would you like help with today?</p>
+                    </div>
+                </div>
+            </div>
+            <div class="chat-input">
+                <input type="text" id="chat-input" placeholder="Ask me anything about content creation...">
+                <button onclick="sendMessage()">
+                    <i class="fas fa-paper-plane"></i>
+                </button>
+            </div>
+        </div>
+
+        <div class="quick-questions">
+            <p>Quick questions:</p>
+            <div class="quick-buttons">
+                <button onclick="quickQuestion('Give me 5 viral YouTube niche ideas')">🎯 Viral Niche Ideas</button>
+                <button onclick="quickQuestion('How to write a catchy hook?')">🔥 Hook Tips</button>
+                <button onclick="quickQuestion('Best thumbnail colors for clicks')">🎨 Thumbnail Colors</button>
+                <button onclick="quickQuestion('How long should my video be?')">⏱️ Video Length</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact-section">
+        <div class="section-header">
+            <h2>📬 Get In Touch</h2>
+            <p>Ready to level up your content? Contact me for video editing services or collaborations!</p>
+        </div>
+
+        <div class="contact-container">
+            <div class="contact-info">
+                <h3>Let's Work Together!</h3>
+                <p>Whether you need help with video editing, want to collaborate, or have questions about the AI tools - I'm here to help!</p>
+                
+                <div class="contact-methods">
+                    <div class="contact-method">
+                        <i class="fas fa-envelope"></i>
+                        <div>
+                            <h4>Email</h4>
+                            <p>your-email@example.com</p>
+                        </div>
+                    </div>
+                    <div class="contact-method">
+                        <i class="fab fa-instagram"></i>
+                        <div>
+                            <h4>Instagram</h4>
+                            <p>@your_username</p>
+                        </div>
+                    </div>
+                    <div class="contact-method">
+                        <i class="fab fa-whatsapp"></i>
+                        <div>
+                            <h4>WhatsApp</h4>
+                            <p>+1234567890</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="social-media">
+                    <a href="https://instagram.com/your_username" target="_blank" class="social-btn instagram">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a href="https://youtube.com/your_channel" target="_blank" class="social-btn youtube">
+                        <i class="fab fa-youtube"></i>
+                    </a>
+                    <a href="https://tiktok.com/@your_username" target="_blank" class="social-btn tiktok">
+                        <i class="fab fa-tiktok"></i>
+                    </a>
+                    <a href="https://twitter.com/your_username" target="_blank" class="social-btn twitter">
+                        <i class="fab fa-twitter"></i>
+                    </a>
+                </div>
+            </div>
+
+            <div class="contact-form">
+                <form id="contactForm" onsubmit="submitForm(event)">
+                    <div class="form-group">
+                        <label for="name">Your Name</label>
+                        <input type="text" id="name" name="name" required placeholder="Enter your name">
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email Address</label>
+                        <input type="email" id="email" name="email" required placeholder="Enter your email">
+                    </div>
+                    <div class="form-group">
+                        <label for="service">Service Interested In</label>
+                        <select id="service" name="service">
+                            <option value="video-editing">Video Editing</option>
+                            <option value="script-writing">Script Writing Help</option>
+                            <option value="ai-tools">AI Tools Question</option>
+                            <option value="collaboration">Collaboration</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Your Message</label>
+                        <textarea id="message" name="message" required placeholder="Tell me about your project..."></textarea>
+                    </div>
+                    <button type="submit" class="btn-submit">
+                        <i class="fas fa-paper-plane"></i> Send Message
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-logo">
+                <i class="fas fa-robot"></i>
+                <span>CreatorHub AI</span>
+            </div>
+            <p>Helping content creators succeed with the power of AI</p>
+            <div class="footer-links">
+                <a href="#home">Home</a>
+                <a href="#ai-tools">AI Tools</a

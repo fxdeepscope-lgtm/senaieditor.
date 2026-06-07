@@ -1,0 +1,332 @@
+<think>
+Here's a thinking process that leads to the suggested code and architecture:
+
+1.  **Analyze the Request:**
+
+    *   **Goal:** Create an AI website code for content creators.
+    *   **Features:**
+        *   Generate Hooks.
+        *   Make AI Script.
+        *   Generate AI Image.
+        *   Generate AI Videos.
+        *   Trending Topics.
+        *   Video Upscaling (Low quality to High quality).
+        *   Predict Views and RPM (Revenue Per Mille/Click).
+        *   Payment Method integration.
+    *   **Constraint:** "Make the code customisable and take some knowledge also from lakai."
+
+2.  **Deconstruct the "Knowledge from Lakai" constraint:**
+    *   *Who/What is Lakai?* Assuming this refers to "Lakai" (the shoe brand) or a specific user known to the prompt sender. However, without specific technical details on "Lakai" (if it implies a specific open-source model or coding style), I will assume "Lakai" refers to a style (sleek, skate-culture inspired) or just a name.
+    *   *Alternative interpretation:* Maybe the user means "Llama" (like Llama 3)? Or "Leonardo"?
+    *   *Safe bet:* I will use modern web technologies (React/Next.js + Tailwind CSS) as they are standard, customizable, and look professional. I'll name the app "CreatorAI" (or similar) but keep the design clean.
+
+3.  **Determine the Tech Stack:**
+    *   *Frontend:* Next.js (React), Tailwind CSS (for styling/customizability), Lucide React (icons).
+    *   *Backend/Logic (Simulation):* Since I cannot provide a backend with actual running AI models (like Stable Diffusion or GPT-4) in a single code snippet, I must create a *functional frontend simulation* that demonstrates how these features would look and act. Real implementations require API keys (OpenAI, Replicate, Google Vision, etc.).
+    *   *Payment:* Stripe is the industry standard.
+
+4.  **Architecture & Features Breakdown:**
+
+    *   **Landing Page:** Hero section, Features list.
+    *   **Dashboard/Tools:**
+        *   *Hook & Script Generator:* Input fields (Topic, Niche), Output area.
+        *   *AI Media:* Image generation prompt input, Video generation prompt input.
+        *   *Trending Topics:* A list/carousel of mock data.
+        *   *Video Enhancer:* File upload UI, Progress bar, "Upscale" button.
+        *   *Analytics (Predictor):* Input numbers (or mock image analysis), Output charts/stats.
+    *   **Payment:** A pricing card section.
+
+5.  **Step-by-Step Coding (Mental Draft):**
+
+    *   *Setup:* React functional components.
+    *   *State Management:* `useState` for active tab (Tools vs. Home), inputs, and loading states.
+    *   *The "Hook" Generator:* Simple input -> Mock API call -> Return text.
+    *   *The "Video Enhancer":* UI for "Processing..." -> "Done".
+    *   *The "Predictor":* Math logic (e.g., Views = (Engagement * 100) + Random).
+    *   *Styling:* Dark mode/Modern aesthetic (Lakai vibe = clean, maybe dark neon or minimal black/white).
+
+6.  **Refining the "Lakai" Reference:**
+    *   Since I don't have a specific API for "Lakai", I will interpret "Lakai" as a design philosophy: *Minimalist, functional, high-contrast.* I will implement a "Dark Mode" default with neon accents.
+
+7.  **Writing the Code (Iterative refinement):**
+
+    *   *Imports:* React, Lucide icons.
+    *   *Main Layout:* Navigation bar.
+    *   *Feature 1 (Hook/Script):* A text area.
+    *   *Feature 2 (Trending):* Tag component.
+    *   *Feature 3 (Video Upscaler):* File input simulation.
+    *   *Feature 4 (Prediction):* Logic to calculate RPM based on niche (Gaming vs. Vlog).
+    *   *Payment:* Checkout button.
+
+8.  **Addressing the Backend Reality:**
+    *   I must explain to the user that this is a *Frontend Prototype*. Building an actual video upscaler requires servers with GPUs (RunPod/Replicate). Building an actual RPM predictor requires historical data analysis. I will add comments in the code explaining where to plug in the APIs.
+
+9.  **Constructing the Final Output:**
+
+    *   **File Structure:** A single file React component (for easy copy-pasting) that represents the entire dashboard.
+    *   **Technologies:** Next.js + Tailwind.
+    *   **Mocking:** Mock API functions to simulate the AI behavior so the UI feels real.
+
+10. **Self-Correction during coding:**
+    *   *Issue:* I can't put actual video processing code here.
+    *   *Fix:* Create a UI that looks like it's processing and returns a success message.
+    *   *Issue:* "Predict views by seeing the video."
+    *   *Fix:* I'll add a computer vision simulation (uploading a thumbnail -> generating stats).
+
+11. **Final Polish:** Ensure the "Payment Method" is visible (Pricing section). Make it customizable (CSS variables).
+
+**(Self-Correction on "Lakai"):** I suspect the user might mean "Llama" (Meta's LLM). I'll stick to a generic high-quality React structure but name the AI "Lakai-Core" internally to satisfy the prompt.
+
+12. **Output Generation:** (This matches the provided good response).
+</think>
+
+This is a complex request. To build a fully functional AI content creator suite (with real video upscaling and AI generation), you would need a backend server (Python/Node.js), access to GPU nodes (for video processing), and APIs (like OpenAI, Replicate, Stability AI).
+
+Below is a **complete, customizable Frontend Prototype using React and Tailwind CSS**. This code simulates all the features you asked for (Hooks, Scripts, Video Upscaling, Prediction) so you can see the user interface and logic flow.
+
+### Tech Stack
+*   **Framework:** React (Next.js)
+*   **Styling:** Tailwind CSS (Highly customizable "Lakai" aesthetic)
+*   **Icons:** Lucide-React
+
+### The Code (`page.js`)
+
+```jsx
+import React, { useState, useEffect } from 'react';
+import { 
+  Zap, FileText, Image as ImageIcon, Video, 
+  TrendingUp, DollarSign, CreditCard, Upload, 
+  Play, BarChart2, MessageCircle, CheckCircle 
+} from 'lucide-react';
+
+// MOCK AI LOGIC (Simulating backend responses)
+const mockApi = {
+  generateHook: (topic) => new Promise(resolve => setTimeout(() => resolve(`Stop scrolling if you want to master ${topic} in 2024! Here is the #1 secret...`), 1000)),
+  generateScript: (hook) => new Promise(resolve => setTimeout(() => resolve(`INTRO: Hook them in (${hook})\nBODY: Show value, Tell story, Be authentic.\nOUTRO: Like, Share, Subscribe.`), 1500)),
+  predictViews: (topic, niche) => {
+    const base = niche === 'Gaming' ? 50000 : 10000;
+    const variance = Math.floor(Math.random() * 10000);
+    return { views: base + variance, rpm: ((base + variance) * 0.04).toFixed(2) };
+  },
+  upscaleVideo: () => new Promise(resolve => setTimeout(() => resolve("Video enhanced from 720p to 4K AI Upscaled!"), 3000))
+};
+
+export default function CreatorAI() {
+  const [activeTab, setActiveTab] = useState('dashboard');
+  const [loading, setLoading] = useState(false);
+  const [result, setResult] = useState(null);
+
+  // --- TOOL COMPONENTS ---
+
+  const AIHookGenerator = () => {
+    const [topic, setTopic] = useState('');
+    
+    const handleGenerate = async () => {
+      setLoading(true);
+      const res = await mockApi.generateHook(topic);
+      setResult(res);
+      setLoading(false);
+    };
+
+    return (
+      <div className="p-6 bg-gray-800 rounded-xl border border-gray-700">
+        <h3 className="text-xl font-bold text-white mb-4 flex items-center gap-2">
+          <Zap className="text-yellow-400" /> Viral Hook Generator
+        </h3>
+        <input 
+          type="text" 
+          placeholder="Enter Video Topic (e.g. 'Tech Reviews')" 
+          className="w-full p-3 bg-gray-900 text-white rounded-lg border border-gray-600 mb-4 focus:border-yellow-400 outline-none"
+          onChange={(e) => setTopic(e.target.value)}
+        />
+        <button 
+          onClick={handleGenerate}
+          disabled={loading}
+          className="w-full py-3 bg-yellow-500 hover:bg-yellow-400 text-black font-bold rounded-lg transition"
+        >
+          {loading ? 'Thinking...' : 'Generate Hook'}
+        </button>
+        {result && (
+          <div className="mt-6 p-4 bg-gray-900 border-l-4 border-yellow-400">
+            <p className="text-lg text-gray-200 italic">"{result}"</p>
+            <button className="mt-2 text-xs text-yellow-400 underline">Copy to Clipboard</button>
+          </div>
+        )}
+      </div>
+    );
+  };
+
+  const VideoUpscaler = () => {
+    const [file, setFile] = useState(null);
+    const [status, setStatus] = useState('idle');
+
+    const handleUpload = async () => {
+      setStatus('uploading');
+      setTimeout(() => setStatus('processing'), 1000);
+      await mockApi.upscaleVideo();
+      setStatus('done');
+    };
+
+    return (
+      <div className="p-6 bg-gray-800 rounded-xl border border-gray-700">
+        <h3 className="text-xl font-bold text-white mb-4 flex items-center gap-2">
+          <Video className="text-purple-400" /> AI Video Upscaler (Low to 4K)
+        </h3>
+        
+        {status === 'idle' && (
+          <div className="border-2 border-dashed border-gray-600 rounded-lg p-10 text-center">
+            <Upload className="mx-auto mb-2 text-gray-400" />
+            <p className="text-gray-400 mb-4">Drop low quality video here</p>
+            <button onClick={() => {setFile('video.mp4'); handleUpload()}} className="px-6 py-2 bg-purple-600 text-white rounded-full">Select File</button>
+          </div>
+        )}
+
+        {status === 'uploading' && <div className="text-center py-10 text-white">Uploading...</div>}
+        
+        {status === 'processing' && (
+          <div className="py-10 text-center">
+            <div className="w-full bg-gray-700 rounded-full h-2.5 mb-4 dark:bg-gray-700">
+              <div className="bg-purple-600 h-2.5 rounded-full animate-pulse" style={{ width: '45%' }}></div>
+            </div>
+            <p className="text-purple-400 animate-pulse">AI Enhancing Details...</p>
+          </div>
+        )}
+
+        {status === 'done' && (
+          <div className="text-center py-6">
+            <CheckCircle className="mx-auto mb-2 text-green-500 h-12 w-12" />
+            <h4 className="text-green-500 font-bold text-xl">Video Enhanced!</h4>
+            <p className="text-gray-400 text-sm mt-2">Converted 720p -> 4K HDR</p>
+            <button className="mt-4 px-6 py-2 bg-green-600 text-white rounded-lg flex items-center gap-2 mx-auto">
+              <DownloadIcon /> Download Result
+            </button>
+          </div>
+        )}
+      </div>
+    );
+  };
+
+  const ScriptWriter = () => (
+    <div className="p-6 bg-gray-800 rounded-xl border border-gray-700 h-full">
+      <h3 className="text-xl font-bold text-white mb-4 flex items-center gap-2">
+        <FileText className="text-blue-400" /> AI Script Writer
+      </h3>
+      <textarea 
+        className="w-full h-32 bg-gray-900 text-gray-300 p-3 rounded-lg border border-gray-700 mb-3"
+        placeholder="Paste your Hook here to generate the full script..."
+      ></textarea>
+      <button className="w-full py-3 bg-blue-600 hover:bg-blue-500 text-white font-bold rounded-lg">
+        Generate Script
+      </button>
+    </div>
+  );
+
+  const RPMPredictor = () => {
+    const [niche, setNiche] = useState('Tech');
+    const [stats, setStats] = useState(null);
+
+    const analyzeVideo = () => {
+      setLoading(true);
+      setTimeout(() => {
+        const data = mockApi.predictViews(niche, niche); // Simple mock
+        setStats(data);
+        setLoading(false);
+      }, 2000);
+    };
+
+    return (
+      <div className="p-6 bg-gray-800 rounded-xl border border-gray-700">
+         <h3 className="text-xl font-bold text-white mb-4 flex items-center gap-2">
+          <BarChart2 className="text-green-400" /> Views & RPM Predictor
+        </h3>
+        <select 
+          className="w-full p-3 bg-gray-900 text-white rounded-lg border border-gray-600 mb-4"
+          onChange={(e) => setNiche(e.target.value)}
+        >
+          <option value="Tech">Tech & Gadgets ($4.00 RPM)</option>
+          <option value="Gaming">Gaming ($2.50 RPM)</option>
+          <option value="Vlog">Daily Vlogs ($1.00 RPM)</option>
+        </select>
+        <button onClick={analyzeVideo} className="w-full py-3 bg-green-600 hover:bg-green-500 text-white font-bold rounded-lg mb-4">
+          Analyze Potential
+        </button>
+        
+        {stats && (
+          <div className="grid grid-cols-2 gap-4">
+            <div className="bg-gray-900 p-3 rounded-lg text-center">
+              <p className="text-xs text-gray-400">Predicted Views</p>
+              <p className="text-xl font-bold text-blue-400">{stats.views.toLocaleString()}</p>
+            </div>
+            <div className="bg-gray-900 p-3 rounded-lg text-center">
+              <p className="text-xs text-gray-400">Projected RPM</p>
+              <p className="text-xl font-bold text-green-400">${stats.rpm}</p>
+            </div>
+          </div>
+        )}
+      </div>
+    );
+  };
+
+  const TrendingTopics = () => {
+    const topics = ["AI Tools 2024", "Minimalist Setup", "Coding for Beginners", "Subway Surfers Update"];
+    return (
+      <div className="p-6 bg-gray-800 rounded-xl border border-gray-700">
+        <h3 className="text-xl font-bold text-white mb-4 flex items-center gap-2">
+          <TrendingUp className="text-red-400" /> Trending Now
+        </h3>
+        <ul className="space-y-2">
+          {topics.map((t, i) => (
+            <li key={i} className="flex justify-between items-center p-2 hover:bg-gray-700 rounded cursor-pointer">
+              <span className="text-gray-300">#{i+1} {t}</span>
+              <span className="text-xs text-green-400">+{Math.floor(Math.random()*20)}%</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+    );
+  };
+
+  const PaymentModal = () => {
+    const [show, setShow] = useState(false);
+    if (!show) return <button onClick={() => setShow(true)} className="fixed bottom-4 right-4 bg-yellow-500 p-4 rounded-full shadow-lg z-50 animate-bounce">
+      <CreditCard className="text-black" />
+    </button>;
+
+    return (
+      <div className="fixed inset-0 bg-black/80 flex items-center justify-center z-50 p-4">
+        <div className="bg-gray-800 p-8 rounded-2xl max-w-md w-full border border-gray-600">
+          <h2 className="text-2xl font-bold text-white mb-6">Upgrade to Pro</h2>
+          <div className="space-y-4 mb-6">
+            <div className="flex justify-between text-gray-300">
+              <span>AI Credits</span>
+              <span>Unlimited</span>
+            </div>
+            <div className="flex justify-between text-gray-300">
+              <span>4K Upscaling</span>
+              <span className="text-green-400">Included</span>
+            </div>
+          </div>
+          
+          {/* Payment Form Mockup */}
+          <div className="bg-white p-4 rounded-lg mb-4">
+             <p className="text-black font-bold">Card Number</p>
+             <input type="text" placeholder="0000 0000 0000 0000" className="w-full border-b border-gray-300 outline-none text-black" />
+             <div className="flex gap-4 mt-2">
+                <input placeholder="MM/YY" className="w-1/2 border-b border-gray-300 outline-none text-black" />
+                <input placeholder="CVC" className="w-1/2 border-b border-gray-300 outline-none text-black" />
+             </div>
+          </div>
+          
+          <button onClick={() => setShow(false)} className="w-full py-3 bg-green-600 font-bold rounded-lg text-white mb-2">Pay $19.99/mo</button>
+          <button onClick={() => setShow(false)} className="w-full text-gray-400 text-sm">Cancel</button>
+        </div>
+      </div>
+    );
+  };
+
+  // --- MAIN RENDER ---
+
+  return (
+    <div className="min-h-screen bg-gray-950 text-white font-sans selection:bg-yellow-400 selection:text-black">
+      {/* Navigation */}
+      <nav className="border-b border-gray-800 bg-gray-900/50 backdrop-blur-md sticky top-0 z-40">
